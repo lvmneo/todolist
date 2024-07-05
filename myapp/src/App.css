@@ -38,53 +38,72 @@ header {
   
   position: relative;
   padding: 2rem;
-  word-wrap: break-word;
-  
+
   
 }
 
 .input-container input[type="text"] {
   
   border: none;
-  
   outline: none; /* Убираем контур при фокусировке */
  
   font-size: 20px;
-    
-   width: 55%;
+   width: 85%;
   padding: 0px;
- 
+
   
 }
 
+.task-input{
+  position: relative;
+  right: 160px;
+  word-wrap: break-word;
+}
 .project-name-input{
   position: relative;
  top: 21px;
- left: 70px;
+ left: 20px;
+ word-wrap: break-word;
+ width: 70%;
  
 }
 .project-name {
 margin-left: 10rem ;
 bottom: 0;
+word-wrap: break-word; /* Разрешаем перенос слов */
 position: relative;
 color: rgb(103, 41, 204);
 justify-content: center;
 display: flex;
+overflow: hidden;
+
 
 }
-
+.complexity-input{
+  padding: 0.3rem;
+  position: relative;
+  top: 25px;
+  font-weight: bold;
+  
+}
+.task-complexity{
+  position: relative;
+  padding: 0.25rem;
+  margin-top: -22px;
+}
 .Task{
   padding: 0.3rem;
   position: relative;
   top: -15px;
   font-weight: bold;
+
 }
 .add-btn {
  
   padding: 10px;
   position: relative;
-  top: -32px;
-  left:120px;
+  top: -22px;
+  left:70px;
 }
 
 ul {
@@ -100,6 +119,8 @@ li {
   
   background-color: #f9f9f9;
   border-radius: 0.5rem;
+  
+  
 }
 
 
