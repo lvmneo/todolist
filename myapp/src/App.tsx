@@ -24,7 +24,7 @@ const TodoApp: React.FC = () => {
   const [color, setColor] = useState<string>('rgba(228, 44, 95, 1)');
 
   const addTodo = (): void => {
-    if (!task || !projectName || !selectedDay) return;
+    if (!task || !projectName ) return;
     const newTask: ITodo = { id: Date.now(), text: task, projectName, complexity, selectedDay, color };
     setTodos([...todos, newTask]);
     setTask('');

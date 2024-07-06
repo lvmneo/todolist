@@ -1,4 +1,4 @@
-/* DropdownMenu.css */
+
 .dropdown-menu {
     display: flex;
     flex-direction: column;
@@ -12,10 +12,11 @@
   .day-button {
     padding: 10px;
     border: none;
-    background-color: rgba(217, 217, 217, 1);
+    background-color: rgb(226, 223, 240);
     color: black;
     cursor: pointer;
     text-align: center;
+    
   }
   
   .day-button:hover {
@@ -25,4 +26,5 @@
   .day-button.selected {
     background-color: #5D5FEF;
     color: white;
+   
   }

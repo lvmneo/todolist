@@ -6,7 +6,7 @@ h1{
 .todo-container {
  
   min-height: 400px;
-  width: 620px;
+  width: 680px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -23,8 +23,8 @@ h1{
 header {
   display: flex;
   justify-content: center;
-  width: 80%; /* Уменьшите ширину контейнера */
-  max-width: 500px; /* Установите максимальную ширину */
+  width: 80%; 
+  max-width: 500px; 
   padding: 1.5rem 1rem;
   background: white;
   border-radius: 1rem;
@@ -45,12 +45,12 @@ header {
 .input-container input[type="text"] {
   
   border: none;
-  outline: none; /* Убираем контур при фокусировке */
- 
+  outline: none; 
+  word-wrap: break-word;
   font-size: 20px;
-   width: 205%;
+  width: 160%;
   padding: 0px;
-
+ 
   
 }
 
@@ -71,12 +71,13 @@ header {
 .project-name {
 margin-left: 10rem ;
 bottom: 0;
-word-wrap: break-word; /* Разрешаем перенос слов */
+word-wrap: break-word; 
 position: relative;
 color: rgb(103, 41, 204);
 justify-content: center;
 display: flex;
 overflow: hidden;
+top: 17.9px;
 
 
 }
@@ -110,28 +111,27 @@ overflow: hidden;
 ul {
   list-style: none;
   padding: 0;
-  font-size: 1rem;
+  font-size: 1.03rem;
   
 }
 
 li {
   margin: 5px 0;
-  padding: 5px;
+  padding: 4px;
   
   background-color: #f9f9f9;
   border-radius: 0.5rem;
-  
   
 }
 
 
 .todos, .dones {
   float: left;
-  width: 250px;
+  width: 280px;
   min-height: 300px;
   margin: 20px;
   padding:10px;
- 
+
   border-radius: 8px;
   background:rgba(213, 204, 255, 1);
   color: rgb(62, 18, 119);
@@ -140,10 +140,10 @@ li {
 }
 
 .delete-btn  {
-  max-width: 20px; /* Максимальная ширина изображения */
-  height: auto; /* Высота изменится автоматически */
-  object-fit: contain; /* Сохраняет пропорции изображения */
-  margin-left: 215px;
+  max-width: 20px; 
+  height: auto; 
+  object-fit: contain;
+  margin-left: 245px;
   margin-top: 0.2rem;
 }
 
