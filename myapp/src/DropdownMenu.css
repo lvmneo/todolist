@@ -1,0 +1,28 @@
+/* DropdownMenu.css */
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1;
+  }
+  
+  .day-button {
+    padding: 10px;
+    border: none;
+    background-color: rgba(217, 217, 217, 1);
+    color: black;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .day-button:hover {
+    background-color: rgba(200, 200, 200, 1);
+  }
+  
+  .day-button.selected {
+    background-color: #5D5FEF;
+    color: white;
+  }

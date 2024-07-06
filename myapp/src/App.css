@@ -48,7 +48,7 @@ header {
   outline: none; /* Убираем контур при фокусировке */
  
   font-size: 20px;
-   width: 85%;
+   width: 205%;
   padding: 0px;
 
   
@@ -56,15 +56,16 @@ header {
 
 .task-input{
   position: relative;
-  right: 160px;
+  left: -280px;
   word-wrap: break-word;
 }
 .project-name-input{
   position: relative;
  top: 21px;
- left: 20px;
+ left: -70px;
  word-wrap: break-word;
  width: 70%;
+ 
  
 }
 .project-name {
