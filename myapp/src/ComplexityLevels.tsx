@@ -6,6 +6,7 @@ import { SVGProps } from 'react';
 import './ComplexityLevels.css';
 import DropdownMenu from './DropdownMenu';
 import SvgContent from './SvgContent'
+import ColorDropdownMenu from './ColorDropdownMenu';
 
 
 interface ComplexityLevelsProps {
@@ -51,6 +52,7 @@ const DayButton: React.FC<DayButtonProps> = ({ onClick, fill, day, ...props }) =
 
 const ComplexityLevels: React.FC<ComplexityLevelsProps> = ({ complexity, setComplexity, selectedDay, setSelectedDay, color, setColor }) => {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
+  const [colorDropdownVisible, setColorDropdownVisible] = useState<boolean>(false);
 
 
 
@@ -68,6 +70,15 @@ const ComplexityLevels: React.FC<ComplexityLevelsProps> = ({ complexity, setComp
     }
   };
 
+  const handleComplexityClick = (level:number) => {
+    setColorDropdownVisible(!colorDropdownVisible);
+    handleSetComplexity(level);
+  };
+
+const handleColorClickClose =() =>{
+  setColorDropdownVisible(false);
+
+}
   const handleCloseDropdown = () => {
     setDropdownVisible(false);
   };
@@ -91,11 +102,20 @@ const ComplexityLevels: React.FC<ComplexityLevelsProps> = ({ complexity, setComp
       {[1, 2, 3].map((level) => (
         <CustomIcon
           key={level}
-          onClick={() => handleSetComplexity(level)}
+          onClick={() => handleComplexityClick(level)}
           fill={getIconColor(level)}
           className="customIcon"
         />
       ))}
+
+{colorDropdownVisible && (
+        <ColorDropdownMenu
+          selectedColor={color}
+          setSelectedColor={setColor}
+       
+          onClose={handleColorClickClose}
+        />
+      )}
     </div>
     
   );

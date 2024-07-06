@@ -92,14 +92,7 @@ const TodoApp: React.FC = () => {
               setColor={setColor}
             />
           </div>
-          <div className="color-picker">
-            <label htmlFor="color"></label>
-            <select id="color" value={color} onChange={handleColorChange}>
-              <option value="rgba(228, 44, 95, 1)">Красный</option>
-              <option value="rgba(93, 95, 239, 1)">Голубой</option>
-              <option value="rgba(255, 206, 86, 1)">Желтый</option>
-            </select>
-          </div>
+          
           <div className="task-input">
             <input
               type="text"

@@ -56,17 +56,17 @@ header {
 
 .task-input{
   position: relative;
-  left: -280px;
+  left: -180px;
   word-wrap: break-word;
 }
 .project-name-input{
   position: relative;
  top: 21px;
- left: -70px;
+ left: -20px;
  word-wrap: break-word;
  width: 70%;
- 
- 
+ direction: rtl;
+ text-align: center;
 }
 .project-name {
 margin-left: 10rem ;
