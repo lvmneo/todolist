@@ -12,7 +12,7 @@ const ColorDropdownMenu: React.FC<ColorDropdownMenuProps> = ({ selectedColor, se
     { name: 'Low', value: 'rgba(93, 95, 239, 1)' },
     { name: 'Medium', value: 'rgba(255, 206, 86, 1)' },
     { name: 'High', value: 'rgba(228, 44, 95, 1)' },
-    // Добавьте другие цвета по желанию
+   
   ];
 
   const handleColorClick = (color: string) => {
