@@ -53,13 +53,11 @@ const DayButton: React.FC<DayButtonProps> = ({ onClick, fill, day, ...props }) =
 const ComplexityLevels: React.FC<ComplexityLevelsProps> = ({ complexity, setComplexity, selectedDay, setSelectedDay, color, setColor }) => {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
   const [colorDropdownVisible, setColorDropdownVisible] = useState<boolean>(false);
+  const [clicksCount, setClicksCount] = useState<Record<number, number>>({});
 
 
 
 
-  const handleSetComplexity = (level: number) => {
-    setComplexity(complexity === level ? level - 1 : level);
-  };
 
   const handleDayClick = () => {
     if (selectedDay) {
@@ -70,11 +68,24 @@ const ComplexityLevels: React.FC<ComplexityLevelsProps> = ({ complexity, setComp
     }
   };
 
-  const handleComplexityClick = (level:number) => {
-    setColorDropdownVisible(!colorDropdownVisible);
-    handleSetComplexity(level);
-  };
+  const handleComplexityClick = (level: number) => {
+    setClicksCount(prevClicksCount => {
+      const newClicksCount = { ...prevClicksCount };
+      const currentCount = newClicksCount[level] || 0;
 
+      if (currentCount === 1) {
+       
+        setColorDropdownVisible(true);
+        newClicksCount[level] = 0;
+      } else {
+       
+        setComplexity(level);
+        newClicksCount[level] = currentCount + 1;
+      }
+
+      return newClicksCount;
+    });
+  };
 const handleColorClickClose =() =>{
   setColorDropdownVisible(false);
 

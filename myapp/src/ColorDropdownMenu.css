@@ -1,10 +1,11 @@
 
 .color-dropdown-menu {
     display: flex;
-    flex-direction: column;
+     flex-direction: row; 
     position: absolute;
     z-index: 1;
-    width: 40%;
+    width: 50px;
+    
 
   }
   
@@ -16,5 +17,5 @@
     color: black;
     cursor: pointer;
     border-radius: 4px;
-    
+    text-align: center;
   }
