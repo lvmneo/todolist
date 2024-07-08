@@ -4,6 +4,7 @@ import deleteIcon from './images/btndel.png';
 import addIcon from './images/btnadd.png';
 import './ComplexityLevels.css'
 import './App.css';
+import EditableText from './EditableText';
 
 interface ITodo {
   id: number;
@@ -24,7 +25,7 @@ const TodoApp: React.FC = () => {
   const [color, setColor] = useState<string>('rgba(228, 44, 95, 1)');
 
   const addTodo = (): void => {
-    if (!task || !projectName ) return;
+    if (!task || !projectName) return;
     const newTask: ITodo = { id: Date.now(), text: task, projectName, complexity, selectedDay, color };
     setTodos([...todos, newTask]);
     setTask('');
@@ -73,9 +74,9 @@ const TodoApp: React.FC = () => {
     setDone(done.map(doneTask => (doneTask.id === id ? { ...doneTask, color } : doneTask)));
   };
 
-  const handleColorChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
-    setColor(event.target.value);
-  };
+  // const handleColorChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+  // setColor(event.target.value);
+  // };
 
   return (
     <div className="todo-container">
@@ -83,16 +84,9 @@ const TodoApp: React.FC = () => {
       <div className="input-container">
         <header>
           <div className="complexity-input">
-            <ComplexityLevels
-              complexity={complexity}
-              setComplexity={setComplexity}
-              selectedDay={selectedDay}
-              setSelectedDay={setSelectedDay}
-              color={color}
-              setColor={setColor}
-            />
+            <ComplexityLevels complexity={complexity} setComplexity={setComplexity} selectedDay={selectedDay} setSelectedDay={setSelectedDay} color={color} setColor={setColor} />
           </div>
-          
+
           <div className="task-input">
             <input
               type="text"
@@ -102,7 +96,7 @@ const TodoApp: React.FC = () => {
             />
           </div>
           <div className="project-name-input">
-            <button className="add-btn" onClick={addTodo}>Add</button>
+            <button className="add-btn" onClick={addTodo}>+</button>
             <input
               type="text"
               value={projectName}

@@ -1,3 +1,7 @@
+body {
+  background: #e6f0f5;
+}
+
 h1{
   display: flex;
   justify-content: center;
@@ -16,8 +20,8 @@ h1{
   border-radius: 1rem;
   border: 0.5rem solid white;
   background:rgb(67, 48, 160);
-  
-
+  box-shadow: 0 15px 30px rgba(0,0,0,.65);
+ 
 }
 
 header {
@@ -56,18 +60,20 @@ header {
 
 .task-input{
   position: relative;
-  left: -180px;
+  left: -169px;
   word-wrap: break-word;
 }
+
 .project-name-input{
   position: relative;
- top: 21px;
+ top: 6px;
  left: -20px;
  word-wrap: break-word;
  width: 70%;
  direction: rtl;
  text-align: center;
 }
+
 .project-name {
 margin-left: 10rem ;
 bottom: 0;
@@ -77,51 +83,57 @@ color: rgb(103, 41, 204);
 justify-content: center;
 display: flex;
 overflow: hidden;
-top: 17.9px;
+
 
 
 }
 .complexity-input{
-  padding: 0.3rem;
+  padding: 0.1rem;
   position: relative;
   top: 25px;
-  font-weight: bold;
+
   
 }
 .task-complexity{
   position: relative;
   padding: 0.25rem;
-  margin-top: -22px;
+  margin-top: -40px;
+  
 }
-.Task{
-  padding: 0.3rem;
+.Task{  /*nтекст бокс внутри колонок*/
+  padding: 0.2rem;
   position: relative;
   top: -15px;
   font-weight: bold;
+  right: -9px;
 
 }
 .add-btn {
  
   padding: 10px;
   position: relative;
-  top: -22px;
+  top: -15px;
   left:70px;
+  cursor: pointer;
+  border: none;
+
 }
 
 ul {
   list-style: none;
-  padding: 0;
+  padding: 0px;
   font-size: 1.03rem;
+ 
   
 }
 
 li {
   margin: 5px 0;
-  padding: 4px;
-  
+  padding: 3px;
+
   background-color: #f9f9f9;
   border-radius: 0.5rem;
-  
+  margin-bottom: 20px;
 }
 
 
@@ -145,5 +157,6 @@ li {
   object-fit: contain;
   margin-left: 245px;
   margin-top: 0.2rem;
+  cursor: pointer;
 }
 

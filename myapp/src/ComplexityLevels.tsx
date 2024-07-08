@@ -25,8 +25,7 @@ interface CustomIconProps extends React.SVGProps<SVGSVGElement> {
 
 const CustomIcon: React.FC<CustomIconProps> = ({ onClick, fill, ...props }) => (
   <svg
-    width="45"
-    height="45"
+   
     viewBox="0 0 55 55"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -45,15 +44,16 @@ interface DayButtonProps extends React.SVGProps<SVGSVGElement> {
 }
 
 const DayButton: React.FC<DayButtonProps> = ({ onClick, fill, day, ...props }) => (
-  <button onClick={onClick} style={{ background: fill, border: 'none',borderRadius: '10px', padding: 0, }}>
-    <SvgContent day={day} {...props} />
-  </button>
+  <button className="daybutton" onClick={onClick} style={{ background: fill }}>
+  <SvgContent day={day} {...props} />
+</button>
 );
 
 const ComplexityLevels: React.FC<ComplexityLevelsProps> = ({ complexity, setComplexity, selectedDay, setSelectedDay, color, setColor }) => {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
   const [colorDropdownVisible, setColorDropdownVisible] = useState<boolean>(false);
   const [clicksCount, setClicksCount] = useState<Record<number, number>>({});
+  
 
 
 
