@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import { SVGProps } from 'react';
-import './ComplexityLevels.css';
+import './css/ComplexityLevels.css'
 import DropdownMenu from './DropdownMenu';
 import SvgContent from './SvgContent'
 import ColorDropdownMenu from './ColorDropdownMenu';
@@ -26,13 +26,13 @@ interface CustomIconProps extends React.SVGProps<SVGSVGElement> {
 const CustomIcon: React.FC<CustomIconProps> = ({ onClick, fill, ...props }) => (
   <svg
    
-    viewBox="0 0 55 55"
+    viewBox="0 0 24 13"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     onClick={onClick}
     {...props}
   >
-    <path d="M0.737061 14.2498H45.856C50.8397 14.2498 54.8797 18.2898 54.8797 23.2735V33.5864C54.8797 37.8582 51.4168 41.3211 47.1451 41.3211H27.8084C12.8573 41.3211 0.737061 29.2008 0.737061 14.2498V14.2498Z" fill={fill} />
+    <path d="M0 0.5H20C22.2091 0.5 24 2.29086 24 4.5V9.07143C24 10.965 22.465 12.5 20.5714 12.5H12C5.37258 12.5 0 7.12742 0 0.5Z" fill={fill} />
   </svg>
 );
 type Weekday = 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun';
@@ -54,9 +54,6 @@ const ComplexityLevels: React.FC<ComplexityLevelsProps> = ({ complexity, setComp
   const [colorDropdownVisible, setColorDropdownVisible] = useState<boolean>(false);
   const [clicksCount, setClicksCount] = useState<Record<number, number>>({});
   
-
-
-
 
 
   const handleDayClick = () => {

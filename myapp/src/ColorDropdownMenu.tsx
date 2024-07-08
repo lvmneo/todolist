@@ -1,5 +1,5 @@
 import React from 'react';
-import './ColorDropdownMenu.css';
+import './css/ColorDropdownMenu.css';
 
 interface ColorDropdownMenuProps {
   selectedColor: string;
