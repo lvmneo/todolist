@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-
+import React, { useState,useEffect } from 'react';
+import axios from 'axios';
 import { DoneIcon, TodoIcon } from './Icons';
 import './css/ComplexityLevels.css'
 import './css/App.css';
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
+
 
 interface ITodo {
   id: number;
@@ -23,10 +24,33 @@ const TodoApp: React.FC = () => {
   const [complexity, setComplexity] = useState<number>(0);
   const [selectedDay, setSelectedDay] = useState<string>('');
   const [color, setColor] = useState<string>('rgba(228, 44, 95, 1)');
+  
 
-  const addTodo = (): void => {
+  //-------------------------------------------------------------------
+  //-------------------------------------------------------------------
+
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/todos')
+      .then(response => setTodos(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
+
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
+
+  const addTodo = async (): Promise<void> => {
     if (!task || !projectName) return;
     const newTask: ITodo = { id: Date.now(), text: task, projectName, complexity, selectedDay, color };
+    try {
+      const response = await axios.post('http://localhost:8000/api/todos', newTask);
+      if (response.status === 201) {
+        setTodos([...todos, response.data]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
     setTodos([...todos, newTask]);
     setTask('');
     setProjectName('');

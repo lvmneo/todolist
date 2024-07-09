@@ -47,8 +47,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
 <div className="Task"onClick={(event) => {if (!(event.target as HTMLElement).classList.contains('editable-text')) {
           markAsDoneOrTodo(todo.id); }}}
     >
-   
-      <EditableText
+       <EditableText
         text={todo.text}
         onTextChange={(newText) => updateTaskText(todo.id, newText)}
       />

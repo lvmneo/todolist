@@ -49,8 +49,9 @@ const TodoInput: React.FC<TodoInputProps> = ({
           placeholder="New tasks"
         />
       </div>
+    
       <div className="project-name-input">
-        <button className="add-btn" onClick={addTodo}>+</button>
+      <button className="add-btn" onClick={addTodo}>+</button>
         <input
           type="text"
           value={projectName}
@@ -58,6 +59,7 @@ const TodoInput: React.FC<TodoInputProps> = ({
           placeholder="Project name"
         />
       </div>
+
     </header>
   </div>
 );
