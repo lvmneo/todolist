@@ -1,3 +1,5 @@
+//изображения в меню  для выбора дня недели 
+
 import React from 'react';
 type Weekday = 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun';
 

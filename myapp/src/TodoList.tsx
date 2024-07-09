@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoItem from './TodoItem';
 
+
 interface ITodo {
     id: number;
     text: string;
@@ -17,6 +18,8 @@ interface TodoListProps {
   updateTaskComplexity: (id: number, complexity: number) => void;
   updateTaskSelectedDay: (id: number, selectedDay: string) => void;
   updateTaskColor: (id: number, color: string) => void;
+  updateTaskText: (id: number, text: string) => void;
+  
   isDone: boolean;
 }
 
@@ -27,9 +30,13 @@ const TodoList: React.FC<TodoListProps> = ({
   updateTaskComplexity,
   updateTaskSelectedDay,
   updateTaskColor,
+  updateTaskText,
   isDone,
 }) => (
+
+
   <ul>
+    
     {todos.map((todo) => (
       <TodoItem
         key={todo.id}
@@ -39,6 +46,7 @@ const TodoList: React.FC<TodoListProps> = ({
         updateTaskComplexity={updateTaskComplexity}
         updateTaskSelectedDay={updateTaskSelectedDay}
         updateTaskColor={updateTaskColor}
+        updateTaskText={updateTaskText}
         isDone={isDone}
       />
     ))}

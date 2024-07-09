@@ -8,6 +8,7 @@ h1{
   font-size: 40px;
 }
 
+
 .todo-container {
  
   min-height: 400px;
@@ -88,19 +89,7 @@ overflow: hidden;
 
 
 }
-.complexity-input{
-  padding: 0.1rem;
-  position: relative;
-  top: 25px;
 
-  
-}
-.task-complexity{
-  position: relative;
-  padding: 0.25rem;
-  margin-top: -40px;
-  
-}
 .Task{  /*nтекст бокс внутри колонок*/
   padding: 0.2rem;
   position: relative;
@@ -117,7 +106,6 @@ overflow: hidden;
   left:70px;
   cursor: pointer;
   border: none;
-
 }
 
 ul {
@@ -153,11 +141,11 @@ li {
 }
 
 .delete-btn  {
-  max-width: 20px; 
+  max-width: 24px; 
   height: auto; 
   object-fit: contain;
-  margin-left: 245px;
-  margin-top: 0.2rem;
+  margin-left: 250px;
+  margin-top: 0.1rem;
   cursor: pointer;
 }
 

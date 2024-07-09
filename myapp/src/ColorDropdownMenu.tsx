@@ -1,3 +1,5 @@
+//меню цвета для приоритета 
+
 import React from 'react';
 import './css/ColorDropdownMenu.css';
 

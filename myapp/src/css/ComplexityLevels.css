@@ -9,9 +9,6 @@
    
 }
 
-.task-complexity{
-    width: 50%;
-}
 
 .daybutton {
     background: fill;
@@ -19,9 +16,24 @@
     border-Radius: 10px;
     padding: 0;
     cursor: pointer;
+    transform: scale(0.9);
   }
 
   .todos .daybutton,
 .dones .daybutton {
   transform: scale(0.8);
+}
+
+.complexity-input{
+  padding: 0.1rem;
+  position: relative;
+  top: 25px;
+
+  
+}
+.task-complexity{
+  position: relative;
+  padding: 0.25rem;
+  margin-top: -40px;
+  width: 50%;
 }

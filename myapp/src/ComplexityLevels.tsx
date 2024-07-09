@@ -1,4 +1,4 @@
-/*уровни сложности,кнопка для выбора дней,цвета*/
+//уровни сложности ,кнопка для выбора дней,цвета
 
 
 import React, { useState } from 'react';
@@ -26,10 +26,11 @@ interface CustomIconProps extends React.SVGProps<SVGSVGElement> {
 const CustomIcon: React.FC<CustomIconProps> = ({ onClick, fill, ...props }) => (
   <svg
    
-    viewBox="0 0 24 13"
+    viewBox="0 0 24 12"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    onClick={onClick}
+
+    onMouseEnter={() => onClick()}
     {...props}
   >
     <path d="M0 0.5H20C22.2091 0.5 24 2.29086 24 4.5V9.07143C24 10.965 22.465 12.5 20.5714 12.5H12C5.37258 12.5 0 7.12742 0 0.5Z" fill={fill} />
@@ -64,24 +65,15 @@ const ComplexityLevels: React.FC<ComplexityLevelsProps> = ({ complexity, setComp
       setDropdownVisible(!dropdownVisible);
     }
   };
-
+// setColorDropdownVisible(true);
   const handleComplexityClick = (level: number) => {
-    setClicksCount(prevClicksCount => {
-      const newClicksCount = { ...prevClicksCount };
-      const currentCount = newClicksCount[level] || 0;
-
-      if (currentCount === 1) {
-       
-        setColorDropdownVisible(true);
-        newClicksCount[level] = 0;
-      } else {
-       
-        setComplexity(level);
-        newClicksCount[level] = currentCount + 1;
-      }
-
-      return newClicksCount;
-    });
+    if (complexity === level) {
+      setComplexity(0);
+      setColorDropdownVisible(true);
+    } else {
+     
+      setComplexity(level);
+    }
   };
 const handleColorClickClose =() =>{
   setColorDropdownVisible(false);
@@ -110,7 +102,8 @@ const handleColorClickClose =() =>{
       {[1, 2, 3].map((level) => (
         <CustomIcon
           key={level}
-          onClick={() => handleComplexityClick(level)}
+          onClick={() => {}}
+          onMouseEnter={() => handleComplexityClick(level)}
           fill={getIconColor(level)}
           className="customIcon"
         />

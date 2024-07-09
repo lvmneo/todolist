@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+//редактирование текста внутри заметок,которые в колонках 
+
+import React, { useState, useEffect } from 'react';
 
 interface EditableTextProps {
   text: string;
@@ -8,13 +10,20 @@ interface EditableTextProps {
 const EditableText: React.FC<EditableTextProps> = ({ text, onTextChange }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editableText, setEditableText] = useState(text);
+  
+  useEffect(() => {
+    setEditableText(text);
+  }, [text]); 
 
   const handleTextClick = () => {
     setIsEditing(true);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEditableText(event.target.value);
+    const newValue = event.target.value;
+  if (newValue !== editableText) { // Добавляем проверку на изменение текста
+    setEditableText(newValue);
+  }
   };
 
   const handleBlur = () => {
@@ -30,6 +39,7 @@ const EditableText: React.FC<EditableTextProps> = ({ text, onTextChange }) => {
 
   return isEditing ? (
     <input
+    className="editable-text"
       type="text"
       value={editableText}
       onChange={handleChange}
@@ -38,7 +48,7 @@ const EditableText: React.FC<EditableTextProps> = ({ text, onTextChange }) => {
       autoFocus
     />
   ) : (
-    <span onClick={handleTextClick}>
+    <span className="editable-text" onClick={handleTextClick}>
       {text}
     </span>
   );

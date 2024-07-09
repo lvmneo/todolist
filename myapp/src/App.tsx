@@ -71,6 +71,11 @@ const TodoApp: React.FC = () => {
     setDone(done.map(doneTask => (doneTask.id === id ? { ...doneTask, color } : doneTask)));
   };
 
+ 
+  const updateTaskText = (id: number, newText: string): void => {
+    setTodos(todos.map(todo => (todo.id === id ? { ...todo, text: newText } : todo)));
+    setDone(done.map(doneTask => (doneTask.id === id ? { ...doneTask, text: newText } : doneTask)));
+  };
   return (
     <div className="todo-container">
       <h1>TO-DO LIST</h1>
@@ -96,6 +101,7 @@ const TodoApp: React.FC = () => {
           updateTaskComplexity={updateTaskComplexity}
           updateTaskSelectedDay={updateTaskSelectedDay}
           updateTaskColor={updateTaskColor}
+          updateTaskText={updateTaskText}
           isDone={false}
         />
       </div>
@@ -108,6 +114,7 @@ const TodoApp: React.FC = () => {
           updateTaskComplexity={updateTaskComplexity}
           updateTaskSelectedDay={updateTaskSelectedDay}
           updateTaskColor={updateTaskColor}
+          updateTaskText={updateTaskText}
           isDone={true}
         />
       </div>

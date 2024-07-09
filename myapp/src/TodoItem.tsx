@@ -19,6 +19,7 @@ interface TodoItemProps {
   updateTaskComplexity: (id: number, complexity: number) => void;
   updateTaskSelectedDay: (id: number, selectedDay: string) => void;
   updateTaskColor: (id: number, color: string) => void;
+  updateTaskText: (id: number, text: string) => void; 
   isDone: boolean;
 }
 
@@ -29,6 +30,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
   updateTaskComplexity,
   updateTaskSelectedDay,
   updateTaskColor,
+  updateTaskText,
   isDone,
 }) => (
   <li>
@@ -41,7 +43,17 @@ const TodoItem: React.FC<TodoItemProps> = ({
         deleteTask(todo.id, isDone);
       }}
     />
-    <div className="Task" onClick={() => markAsDoneOrTodo(todo.id)}>{todo.text}</div>
+
+<div className="Task"onClick={(event) => {if (!(event.target as HTMLElement).classList.contains('editable-text')) {
+          markAsDoneOrTodo(todo.id); }}}
+    >
+   
+      <EditableText
+        text={todo.text}
+        onTextChange={(newText) => updateTaskText(todo.id, newText)}
+      />
+    </div>
+    
     <div className="project-name">{todo.projectName}</div>
     <div className="task-complexity">
       <ComplexityLevels
