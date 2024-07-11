@@ -39,7 +39,7 @@ sequelize.authenticate()
 const initializeDatabase = async () => {
   await sequelize.sync();
 
-  // Добавление начальных данных
+  
   await Todo.bulkCreate([
     {
       text: 'buy milk and eggs',

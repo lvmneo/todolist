@@ -22,7 +22,7 @@ export interface TodoStore {
   fetchTodos: () => Promise<void>;
   addTodo: () => Promise<void>;
   markAsDoneOrTodo: (id: number) => void;
-  deleteTask: (id: number, isDone: boolean) => void;
+  deleteTask: (id: number, isDone: boolean) => Promise<void>;
   updateTaskComplexity: (id: number, complexity: number) => void;
   updateTaskSelectedDay: (id: number, selectedDay: string) => void;
   updateTaskColor: (id: number, color: string) => void;
@@ -45,7 +45,7 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
 
   fetchTodos: async () => {
     try {
-      const response = await axios.get('http://localhost:8000');
+      const response = await axios.get('http://localhost:8000/');
       set({ todos: response.data });
     } catch (error) {
       console.error(error);
@@ -57,7 +57,7 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
     if (!task || !projectName) return;
     const newTask: ITodo = { id: Date.now(), text: task, projectName, complexity, selectedDay, color };
     try {
-      const response = await axios.post('http://localhost:8000', newTask);
+      const response = await axios.post('http://localhost:8000/', newTask);
       if (response.status === 201) {
         set({ todos: [...todos, response.data] });
       }
@@ -91,16 +91,19 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
       });
     }
   },
-
-  deleteTask: (id: number, isDone: boolean) => {
+  deleteTask: async (id: number, isDone: boolean) => {
     const { todos, done } = get();
-    if (isDone) {
-      set({ done: done.filter(doneTask => doneTask.id !== id) });
-    } else {
-      set({ todos: todos.filter(todo => todo.id !== id) });
+    try {
+      await axios.delete(`http://localhost:8000/${id}`);
+      if (isDone) {
+        set({ done: done.filter(doneTask => doneTask.id !== id) });
+      } else {
+        set({ todos: todos.filter(todo => todo.id !== id) });
+      }
+    } catch (error) {
+      console.error(error);
     }
   },
-
   updateTaskComplexity: (id: number, complexity: number) => {
     const { todos, done } = get();
     set({
