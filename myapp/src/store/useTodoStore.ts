@@ -9,6 +9,7 @@ export interface ITodo {
   complexity: number;
   selectedDay: string;
   color: string;
+  status: string;
 }
 
 export interface TodoStore {
@@ -45,8 +46,11 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
 
   fetchTodos: async () => {
     try {
-      const response = await axios.get('http://localhost:8000/');
-      set({ todos: response.data });
+      const response = await axios.get<ITodo[]>('http://localhost:8000/');
+      const allTodos = response.data;
+      const todos = allTodos.filter(todo => todo.status === 'TODO');
+      const done = allTodos.filter(todo => todo.status === 'DONE');
+      set({ todos, done });
     } catch (error) {
       console.error(error);
     }
@@ -55,7 +59,8 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
   addTodo: async () => {
     const { task, projectName, complexity, selectedDay, color, todos } = get();
     if (!task || !projectName) return;
-    const newTask: ITodo = { id: Date.now(), text: task, projectName, complexity, selectedDay, color };
+
+    const newTask: ITodo = { id: Date.now(), text: task, projectName, complexity, selectedDay, color,status: 'TODO' };
     try {
       const response = await axios.post('http://localhost:8000/', newTask);
       if (response.status === 201) {
@@ -74,23 +79,30 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
     });
   },
 
-  markAsDoneOrTodo: (id: number) => {
+  markAsDoneOrTodo: async (id: number) => {
     const { todos, done } = get();
     const taskToMove = todos.find(todo => todo.id === id) || done.find(doneTask => doneTask.id === id);
     if (!taskToMove) return;
 
-    if (todos.includes(taskToMove)) {
-      set({ 
-        done: [...done, taskToMove],
-        todos: todos.filter(todo => todo.id !== id)
-      });
-    } else {
-      set({
-        todos: [...todos, taskToMove],
-        done: done.filter(doneTask => doneTask.id !== id)
-      });
+    const newStatus = taskToMove.status === 'TODO' ? 'DONE' : 'TODO';
+    try {
+      await axios.put(`http://localhost:8000/${id}`, { status: newStatus });
+      if (newStatus === 'DONE') {
+        set({
+          done: [...done, { ...taskToMove, status: 'DONE' }],
+          todos: todos.filter(todo => todo.id !== id)
+        });
+      } else {
+        set({
+          todos: [...todos, { ...taskToMove, status: 'TODO' }],
+          done: done.filter(doneTask => doneTask.id !== id)
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
   },
+
   deleteTask: async (id: number, isDone: boolean) => {
     const { todos, done } = get();
     try {

@@ -6,6 +6,7 @@ const sequelize = new Sequelize({
 });
 
 const Todo = sequelize.define('Todo', {
+  
   text: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -26,6 +27,11 @@ const Todo = sequelize.define('Todo', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: 'TODO' 
+  }
 });
 
 sequelize.authenticate()
