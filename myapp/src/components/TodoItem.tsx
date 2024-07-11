@@ -7,7 +7,7 @@ import '../css/App.css';
 
 
 interface ITodo {
-  id: number;
+  id:number;
   text: string;
   projectName: string;
   complexity: number;
@@ -17,12 +17,12 @@ interface ITodo {
 
 interface TodoItemProps {
   todo: ITodo;
-  deleteTask: (id: number, isDone: boolean) => void;
-  markAsDoneOrTodo: (id: number) => void;
-  updateTaskComplexity: (id: number, complexity: number) => void;
+  deleteTask: (id:number, isDone: boolean) => void;
+  markAsDoneOrTodo: (id:number) => void;
+  updateTaskComplexity: (id:number, complexity: number) => void;
   updateTaskSelectedDay: (id: number, selectedDay: string) => void;
-  updateTaskColor: (id: number, color: string) => void;
-  updateTaskText: (id: number, text: string) => void;
+  updateTaskColor: (id:number, color: string) => void;
+  updateTaskText: (id:number, text: string) => void;
   isDone: boolean;
 }
 

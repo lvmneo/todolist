@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import axios from 'axios';
 import '../css/App.css';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface ITodo {
   id: number;
@@ -26,8 +27,8 @@ export interface TodoStore {
   deleteTask: (id: number, isDone: boolean) => Promise<void>;
   updateTaskComplexity: (id: number, complexity: number) => void;
   updateTaskSelectedDay: (id: number, selectedDay: string) => void;
-  updateTaskColor: (id: number, color: string) => void;
-  updateTaskText: (id: number, newText: string) => void;
+  updateTaskColor: (id:number, color: string) => void;
+  updateTaskText: (id:number, newText: string) => void;
   setTask: (task: string) => void;
   setProjectName: (projectName: string) => void;
   setComplexity: (complexity: number) => void;
@@ -60,7 +61,7 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
     const { task, projectName, complexity, selectedDay, color, todos } = get();
     if (!task || !projectName) return;
 
-    const newTask: ITodo = { id: Date.now(), text: task, projectName, complexity, selectedDay, color,status: 'TODO' };
+    const newTask: ITodo = {  id: Date.now(), text: task, projectName, complexity, selectedDay, color,status: 'TODO' };
     try {
       const response = await axios.post('http://localhost:8000/', newTask);
       if (response.status === 201) {

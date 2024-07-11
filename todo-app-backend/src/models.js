@@ -1,11 +1,17 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
+
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: './database.sqlite',
 });
 
 const Todo = sequelize.define('Todo', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   
   text: {
     type: DataTypes.STRING,
