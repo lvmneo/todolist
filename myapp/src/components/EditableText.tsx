@@ -1,7 +1,7 @@
 //редактирование текста внутри заметок,которые в колонках 
 
 import React, { useState, useEffect } from 'react';
-import './css/EditableText.css'
+import '../css/EditableText.css'
 
 interface EditableTextProps {
   text: string;

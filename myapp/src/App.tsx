@@ -1,11 +1,11 @@
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-import { DoneIcon, TodoIcon } from './Icons';
+import { DoneIcon, TodoIcon } from './components/Icons';
 import './css/ComplexityLevels.css'
 import './css/App.css';
-import TodoInput from './TodoInput';
-import TodoList from './TodoList';
-
+import TodoInput from './components/TodoInput';
+import TodoList from './components/TodoList';
+import { useTodoStore } from './store/useTodoStore';
 
 interface ITodo {
   id: number;
@@ -17,105 +17,21 @@ interface ITodo {
 }
 
 const TodoApp: React.FC = () => {
-  const [todos, setTodos] = useState<ITodo[]>([]);
-  const [done, setDone] = useState<ITodo[]>([]);
-  const [task, setTask] = useState<string>('');
-  const [projectName, setProjectName] = useState<string>('');
-  const [complexity, setComplexity] = useState<number>(0);
-  const [selectedDay, setSelectedDay] = useState<string>('');
-  const [color, setColor] = useState<string>('rgba(228, 44, 95, 1)');
-  
-
-  //-------------------------------------------------------------------
-  //-------------------------------------------------------------------
-
+  const {
+    todos, done, fetchTodos,
+    markAsDoneOrTodo, deleteTask,
+    updateTaskComplexity, updateTaskSelectedDay,
+    updateTaskColor, updateTaskText
+  } = useTodoStore();
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/todos')
-      .then(response => setTodos(response.data))
-      .catch(error => console.error(error));
-  }, []);
+    fetchTodos();
+  }, [fetchTodos]);
 
-
-//-------------------------------------------------------------------
-//-------------------------------------------------------------------
-
-  const addTodo = async (): Promise<void> => {
-    if (!task || !projectName) return;
-    const newTask: ITodo = { id: Date.now(), text: task, projectName, complexity, selectedDay, color };
-    try {
-      const response = await axios.post('http://localhost:8000/api/todos', newTask);
-      if (response.status === 201) {
-        setTodos([...todos, response.data]);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    setTodos([...todos, newTask]);
-    setTask('');
-    setProjectName('');
-    setComplexity(0);
-    setSelectedDay('');
-    setColor('rgba(228, 44, 95, 1)');
-  };
-
-  const markAsDoneOrTodo = (id: number): void => {
-    const taskToMove = todos.find(todo => todo.id === id) || done.find(doneTask => doneTask.id === id);
-    if (!taskToMove) return;
-
-    if (todos.includes(taskToMove)) {
-      setDone([...done, taskToMove]);
-      setTodos(todos.filter(todo => todo.id !== id));
-    } else {
-      setTodos([...todos, taskToMove]);
-      setDone(done.filter(doneTask => doneTask.id !== id));
-    }
-  };
-
-  const deleteTask = (id: number, isDone: boolean): void => {
-    if (isDone) {
-      setDone(done.filter(doneTask => doneTask.id !== id));
-    } else {
-      setTodos(todos.filter(todo => todo.id !== id));
-    }
-  };
-
-  const updateTaskComplexity = (id: number, complexity: number): void => {
-    setTodos(todos.map(todo => (todo.id === id ? { ...todo, complexity } : todo)));
-    setDone(done.map(doneTask => (doneTask.id === id ? { ...doneTask, complexity } : doneTask)));
-  };
-
-  const updateTaskSelectedDay = (id: number, selectedDay: string): void => {
-    setTodos(todos.map(todo => (todo.id === id ? { ...todo, selectedDay } : todo)));
-    setDone(done.map(doneTask => (doneTask.id === id ? { ...doneTask, selectedDay } : doneTask)));
-  };
-
-  const updateTaskColor = (id: number, color: string): void => {
-    setTodos(todos.map(todo => (todo.id === id ? { ...todo, color } : todo)));
-    setDone(done.map(doneTask => (doneTask.id === id ? { ...doneTask, color } : doneTask)));
-  };
-
- 
-  const updateTaskText = (id: number, newText: string): void => {
-    setTodos(todos.map(todo => (todo.id === id ? { ...todo, text: newText } : todo)));
-    setDone(done.map(doneTask => (doneTask.id === id ? { ...doneTask, text: newText } : doneTask)));
-  };
   return (
     <div className="todo-container">
       <h1>TO-DO LIST</h1>
-      <TodoInput
-        task={task}
-        setTask={setTask}
-        projectName={projectName}
-        setProjectName={setProjectName}
-        complexity={complexity}
-        setComplexity={setComplexity}
-        selectedDay={selectedDay}
-        setSelectedDay={setSelectedDay}
-        color={color}
-        setColor={setColor}
-        addTodo={addTodo}
-      />
+      <TodoInput />
       <div className="todos">
         <h2><TodoIcon /> TO-DO</h2>
         <TodoList

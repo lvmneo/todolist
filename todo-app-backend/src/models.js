@@ -60,7 +60,7 @@ const initializeDatabase = async () => {
       projectName: 'draw',
       complexity: 3,
       selectedDay: 'Wed',
-      color: 'rgba(93, 95, 239, 1)',
+      color: 'rgba(255, 206, 86, 1)',
     },
   ]);
 

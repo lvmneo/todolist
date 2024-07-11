@@ -1,16 +1,19 @@
 import React from 'react';
-import ComplexityLevels from './ComplexityLevels';
-import EditableText from './EditableText';
-import deleteIcon from './images/btndel.png';
+import ComplexityLevels from '../components/ComplexityLevels';
+import EditableText from '../components/EditableText';
+import deleteIcon from '../images/btndel.png';
+import '../css/App.css';
+
+
 
 interface ITodo {
-    id: number;
-    text: string;
-    projectName: string;
-    complexity: number;
-    selectedDay: string;
-    color: string;
-  }
+  id: number;
+  text: string;
+  projectName: string;
+  complexity: number;
+  selectedDay: string;
+  color: string;
+}
 
 interface TodoItemProps {
   todo: ITodo;
@@ -19,7 +22,7 @@ interface TodoItemProps {
   updateTaskComplexity: (id: number, complexity: number) => void;
   updateTaskSelectedDay: (id: number, selectedDay: string) => void;
   updateTaskColor: (id: number, color: string) => void;
-  updateTaskText: (id: number, text: string) => void; 
+  updateTaskText: (id: number, text: string) => void;
   isDone: boolean;
 }
 
@@ -44,15 +47,20 @@ const TodoItem: React.FC<TodoItemProps> = ({
       }}
     />
 
-<div className="Task"onClick={(event) => {if (!(event.target as HTMLElement).classList.contains('editable-text')) {
-          markAsDoneOrTodo(todo.id); }}}
+    <div
+      className="Task"
+      onClick={(event) => {
+        if (!(event.target as HTMLElement).classList.contains('editable-text')) {
+          markAsDoneOrTodo(todo.id);
+        }
+      }}
     >
-       <EditableText
+      <EditableText
         text={todo.text}
         onTextChange={(newText) => updateTaskText(todo.id, newText)}
       />
     </div>
-    
+
     <div className="project-name">{todo.projectName}</div>
     <div className="task-complexity">
       <ComplexityLevels

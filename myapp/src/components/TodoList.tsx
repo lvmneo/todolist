@@ -1,15 +1,15 @@
 import React from 'react';
-import TodoItem from './TodoItem';
+import TodoItem from '../components/TodoItem';
 
 
 interface ITodo {
-    id: number;
-    text: string;
-    projectName: string;
-    complexity: number;
-    selectedDay: string;
-    color: string;
-  }
+  id: number;
+  text: string;
+  projectName: string;
+  complexity: number;
+  selectedDay: string;
+  color: string;
+}
 
 interface TodoListProps {
   todos: ITodo[];
@@ -19,23 +19,16 @@ interface TodoListProps {
   updateTaskSelectedDay: (id: number, selectedDay: string) => void;
   updateTaskColor: (id: number, color: string) => void;
   updateTaskText: (id: number, text: string) => void;
-  
   isDone: boolean;
 }
 
 const TodoList: React.FC<TodoListProps> = ({
-  todos,
-  deleteTask,
-  markAsDoneOrTodo,
-  updateTaskComplexity,
-  updateTaskSelectedDay,
-  updateTaskColor,
-  updateTaskText,
-  isDone,
-}) => (
-
-
-  <ul>
+  todos, deleteTask, markAsDoneOrTodo,
+  updateTaskComplexity, updateTaskSelectedDay,
+  updateTaskColor, updateTaskText, isDone
+}) => {
+  return (
+    <ul>
     
     {todos.map((todo) => (
       <TodoItem
@@ -51,6 +44,7 @@ const TodoList: React.FC<TodoListProps> = ({
       />
     ))}
   </ul>
-);
+  );
+};
 
 export default TodoList;

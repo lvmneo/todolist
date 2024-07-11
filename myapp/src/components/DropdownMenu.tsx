@@ -1,7 +1,7 @@
 //меню для выбора дня недели по клику на кнопку 
 
 import React from 'react';
-import './css/DropdownMenu.css';
+import '../css/DropdownMenu.css';
 
 interface DropdownMenuProps {
   selectedDay: string;

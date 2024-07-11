@@ -1,5 +1,6 @@
 import React from 'react';
-import ComplexityLevels from './ComplexityLevels';
+import ComplexityLevels from '../components/ComplexityLevels';
+import { useTodoStore } from '../store/useTodoStore';
 
 interface TodoInputProps {
   task: string;
@@ -15,19 +16,17 @@ interface TodoInputProps {
   addTodo: () => void;
 }
 
-const TodoInput: React.FC<TodoInputProps> = ({
-  task,
-  setTask,
-  projectName,
-  setProjectName,
-  complexity,
-  setComplexity,
-  selectedDay,
-  setSelectedDay,
-  color,
-  setColor,
-  addTodo,
-}) => (
+const TodoInput: React.FC = () => {
+  const {
+    task, projectName, complexity,
+    selectedDay, color, addTodo,
+    setTask, setProjectName, setComplexity,
+    setSelectedDay, setColor
+  } = useTodoStore();
+
+  
+  
+  return (
   <div className="input-container">
     <header>
       <div className="complexity-input">
@@ -63,5 +62,9 @@ const TodoInput: React.FC<TodoInputProps> = ({
     </header>
   </div>
 );
+};
 
 export default TodoInput;
+
+
+

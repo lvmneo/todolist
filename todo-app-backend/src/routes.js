@@ -5,7 +5,7 @@ const { Todo } = require('./models');
 const router = express.Router();
 
 // Маршрут для создания новой задачи
-router.post('/api/todos', async (req, res) => {
+router.post('/todos', async (req, res) => {
   try { // Логирование тела запроса
     console.log('Received POST request to /todos with body:', req.body);
     // Создание новой задачи с использованием данных из тела запроса
@@ -20,7 +20,7 @@ router.post('/api/todos', async (req, res) => {
 });
 
 // Маршрут для получения всех задач
-router.get('/api/todos', async (req, res) => {
+router.get('/todos', async (req, res) => {
   try {
      // Логирование запроса
     console.log('Received GET request to /todos');
@@ -42,7 +42,7 @@ router.get('/api/todos', async (req, res) => {
 });
 
 // Маршрут для обновления задачи по идентификатору
-router.put('/api/todos:id', async (req, res) => {
+router.put('/todos:id', async (req, res) => {
   try {
     console.log(`Received PUT request to /todos/${req.params.id} with body:`, req.body);
     // Поиск задачи по первичному ключу (id)
@@ -62,7 +62,7 @@ router.put('/api/todos:id', async (req, res) => {
 });
 
 //Маршрут для удаления задачи по идентификатору
-router.delete('/api/todos:id', async (req, res) => {
+router.delete('/todos:id', async (req, res) => {
   try {
     console.log(`Received DELETE request to /todos/${req.params.id}`);
     const todo = await Todo.findByPk(req.params.id);

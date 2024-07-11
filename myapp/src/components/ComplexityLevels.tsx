@@ -2,11 +2,10 @@
 
 
 import React, { useState } from 'react';
-import { SVGProps } from 'react';
-import './css/ComplexityLevels.css'
-import DropdownMenu from './DropdownMenu';
-import SvgContent from './SvgContent'
-import ColorDropdownMenu from './ColorDropdownMenu';
+import '../css/ComplexityLevels.css'
+import DropdownMenu from '../components/DropdownMenu';
+import SvgContent from '../components/SvgContent'
+import ColorDropdownMenu from '../components/ColorDropdownMenu';
 
 
 interface ComplexityLevelsProps {

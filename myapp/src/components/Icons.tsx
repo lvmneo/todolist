@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/App.css'
+import '../css/App.css'
 
 export const DoneIcon: React.FC = () => (
     <svg className = "icon"style={{ position: 'relative', top: '5px' }} width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
