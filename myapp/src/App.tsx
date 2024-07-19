@@ -1,6 +1,5 @@
-import React, { useState,useEffect } from 'react';
-import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { DragDropContext, Droppable} from 'react-beautiful-dnd';
 import { DoneIcon, TodoIcon } from './components/Icons';
 import './css/ComplexityLevels.css'
 import './css/App.css';
@@ -24,9 +23,10 @@ const TodoApp: React.FC = () => {
 
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    
       <div className="todo-container">
         <h1>TO-DO LIST</h1>
+        <DragDropContext onDragEnd={onDragEnd}>
         <TodoInput />
         <Droppable droppableId="todos">
           {(provided) => (
@@ -72,8 +72,9 @@ const TodoApp: React.FC = () => {
             </div>
           )}
         </Droppable>
-      </div>
-    </DragDropContext>
+        </DragDropContext>
+       </div>
+      
   );
 };
 

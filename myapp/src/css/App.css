@@ -1,5 +1,9 @@
-body {
-  background: #e6f0f5;
+body,html  #root {
+  height: 100%;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  justify-content: center;
 }
 
 h1{
@@ -14,12 +18,10 @@ h1{
  
   min-height: 400px;
   width: 680px;
-  position: absolute;
+
   top: 50%;
   left: 50%;
   
-  transform: translate(-50%,-50%);
-  margin: 0 auto;
   border-radius: 1rem;
   border: 0.5rem solid white;
   background:rgb(67, 48, 160);
@@ -89,7 +91,7 @@ overflow: hidden;
 
 }
 
-.Task{  /*nтекст бокс внутри колонок*/
+.Task{  
   padding: 0.2rem;
   position: relative;
   top: -15px;
@@ -170,10 +172,11 @@ li {
 
  */
 
- ul {
+ /* ul {
   list-style: none;
   padding: 0;
-
   margin: 0;
-}
 
+  z-index: 1000;
+}
+ */

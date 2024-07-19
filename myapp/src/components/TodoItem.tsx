@@ -60,7 +60,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
         onTextChange={(newText) => updateTaskText(todos.id, newText)}
       />
     </div>
-
     <div className="project-name">{todos.projectName}</div>
     <div className="task-complexity">
       <ComplexityLevels

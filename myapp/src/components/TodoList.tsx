@@ -33,12 +33,11 @@ const TodoList: React.FC<TodoListProps> = ({
     <ul>
       {todos.map((todos, index) => (
         <Draggable key={todos.id} draggableId={todos.id.toString()} index={index}>
-          {(provided,snapshot) => (
+          {(provided) => (
             <div 
               ref={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
-              
             >
               <TodoItem
                 todos={todos}
