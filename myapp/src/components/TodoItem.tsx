@@ -16,7 +16,7 @@ interface ITodo {
 }
 
 interface TodoItemProps {
-  todo: ITodo;
+  todos: ITodo;
   deleteTask: (id:number, isDone: boolean) => void;
   markAsDoneOrTodo: (id:number) => void;
   updateTaskComplexity: (id:number, complexity: number) => void;
@@ -27,7 +27,7 @@ interface TodoItemProps {
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({
-  todo,
+  todos,
   deleteTask,
   markAsDoneOrTodo,
   updateTaskComplexity,
@@ -43,7 +43,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
       className="delete-btn"
       onClick={(event) => {
         event.stopPropagation();
-        deleteTask(todo.id, isDone);
+        deleteTask(todos.id, isDone);
       }}
     />
 
@@ -51,25 +51,25 @@ const TodoItem: React.FC<TodoItemProps> = ({
       className="Task"
       onClick={(event) => {
         if (!(event.target as HTMLElement).classList.contains('editable-text')) {
-          markAsDoneOrTodo(todo.id);
+          markAsDoneOrTodo(todos.id);
         }
       }}
     >
       <EditableText
-        text={todo.text}
-        onTextChange={(newText) => updateTaskText(todo.id, newText)}
+        text={todos.text}
+        onTextChange={(newText) => updateTaskText(todos.id, newText)}
       />
     </div>
 
-    <div className="project-name">{todo.projectName}</div>
+    <div className="project-name">{todos.projectName}</div>
     <div className="task-complexity">
       <ComplexityLevels
-        complexity={todo.complexity}
-        setComplexity={(level) => updateTaskComplexity(todo.id, level)}
-        selectedDay={todo.selectedDay}
-        setSelectedDay={(day) => updateTaskSelectedDay(todo.id, day)}
-        color={todo.color}
-        setColor={(color) => updateTaskColor(todo.id, color)}
+        complexity={todos.complexity}
+        setComplexity={(level) => updateTaskComplexity(todos.id, level)}
+        selectedDay={todos.selectedDay}
+        setSelectedDay={(day) => updateTaskSelectedDay(todos.id, day)}
+        color={todos.color}
+        setColor={(color) => updateTaskColor(todos.id, color)}
       />
     </div>
   </li>

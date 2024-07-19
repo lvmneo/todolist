@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoItem from '../components/TodoItem';
+import { Draggable } from 'react-beautiful-dnd';
 
 
 interface ITodo {
@@ -9,6 +10,7 @@ interface ITodo {
   complexity: number;
   selectedDay: string;
   color: string;
+  status: string;
 }
 
 interface TodoListProps {
@@ -29,21 +31,30 @@ const TodoList: React.FC<TodoListProps> = ({
 }) => {
   return (
     <ul>
-    
-    {todos.map((todo) => (
-      <TodoItem
-        key={todo.id}
-        todo={todo}
-        deleteTask={deleteTask}
-        markAsDoneOrTodo={markAsDoneOrTodo}
-        updateTaskComplexity={updateTaskComplexity}
-        updateTaskSelectedDay={updateTaskSelectedDay}
-        updateTaskColor={updateTaskColor}
-        updateTaskText={updateTaskText}
-        isDone={isDone}
-      />
-    ))}
-  </ul>
+      {todos.map((todos, index) => (
+        <Draggable key={todos.id} draggableId={todos.id.toString()} index={index}>
+          {(provided,snapshot) => (
+            <div 
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              
+            >
+              <TodoItem
+                todos={todos}
+                deleteTask={deleteTask}
+                markAsDoneOrTodo={markAsDoneOrTodo}
+                updateTaskComplexity={updateTaskComplexity}
+                updateTaskSelectedDay={updateTaskSelectedDay}
+                updateTaskColor={updateTaskColor}
+                updateTaskText={updateTaskText}
+                isDone={isDone}
+              />
+            </div>
+          )}
+        </Draggable>
+      ))}
+    </ul>
   );
 };
 

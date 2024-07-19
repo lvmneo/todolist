@@ -65,6 +65,3 @@ const TodoInput: React.FC = () => {
 };
 
 export default TodoInput;
-
-
-

@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import axios from 'axios';
 import '../css/App.css';
 import { v4 as uuidv4 } from 'uuid';
+import { DropResult } from 'react-beautiful-dnd';
 
 export interface ITodo {
   id: number;
@@ -34,6 +35,8 @@ export interface TodoStore {
   setComplexity: (complexity: number) => void;
   setSelectedDay: (selectedDay: string) => void;
   setColor: (color: string) => void;
+  setTodos: (updatedTodos: ITodo[], status: string) => void; 
+  onDragEnd: (result: DropResult) => void;
 }
 
 export const useTodoStore = create<TodoStore>((set, get) => ({
@@ -49,13 +52,14 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
     try {
       const response = await axios.get<ITodo[]>('http://localhost:8000/');
       const allTodos = response.data;
-      const todos = allTodos.filter(todo => todo.status === 'TODO');
-      const done = allTodos.filter(todo => todo.status === 'DONE');
+      const todos = allTodos.filter(todos => todos.status === 'TODO');
+      const done = allTodos.filter(todos => todos.status === 'DONE');
       set({ todos, done });
     } catch (error) {
       console.error(error);
     }
   },
+
 
   addTodo: async () => {
     const { task, projectName, complexity, selectedDay, color, todos } = get();
@@ -82,7 +86,7 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
 
   markAsDoneOrTodo: async (id: number) => {
     const { todos, done } = get();
-    const taskToMove = todos.find(todo => todo.id === id) || done.find(doneTask => doneTask.id === id);
+    const taskToMove = todos.find(todos => todos.id === id) || done.find(doneTask => doneTask.id === id);
     if (!taskToMove) return;
 
     const newStatus = taskToMove.status === 'TODO' ? 'DONE' : 'TODO';
@@ -91,7 +95,7 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
       if (newStatus === 'DONE') {
         set({
           done: [...done, { ...taskToMove, status: 'DONE' }],
-          todos: todos.filter(todo => todo.id !== id)
+          todos: todos.filter(todos => todos.id !== id)
         });
       } else {
         set({
@@ -111,7 +115,7 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
       if (isDone) {
         set({ done: done.filter(doneTask => doneTask.id !== id) });
       } else {
-        set({ todos: todos.filter(todo => todo.id !== id) });
+        set({ todos: todos.filter(todos => todos.id !== id) });
       }
     } catch (error) {
       console.error(error);
@@ -120,7 +124,7 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
   updateTaskComplexity: (id: number, complexity: number) => {
     const { todos, done } = get();
     set({
-      todos: todos.map(todo => (todo.id === id ? { ...todo, complexity } : todo)),
+      todos: todos.map(todos => (todos.id === id ? { ...todos, complexity } : todos)),
       done: done.map(doneTask => (doneTask.id === id ? { ...doneTask, complexity } : doneTask))
     });
   },
@@ -128,7 +132,7 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
   updateTaskSelectedDay: (id: number, selectedDay: string) => {
     const { todos, done } = get();
     set({
-      todos: todos.map(todo => (todo.id === id ? { ...todo, selectedDay } : todo)),
+      todos: todos.map(todos => (todos.id === id ? { ...todos, selectedDay } : todos)),
       done: done.map(doneTask => (doneTask.id === id ? { ...doneTask, selectedDay } : doneTask))
     });
   },
@@ -136,7 +140,7 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
   updateTaskColor: (id: number, color: string) => {
     const { todos, done } = get();
     set({
-      todos: todos.map(todo => (todo.id === id ? { ...todo, color } : todo)),
+      todos: todos.map(todos => (todos.id === id ? { ...todos, color } : todos)),
       done: done.map(doneTask => (doneTask.id === id ? { ...doneTask, color } : doneTask))
     });
   },
@@ -144,9 +148,84 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
   updateTaskText: (id: number, newText: string) => {
     const { todos, done } = get();
     set({
-      todos: todos.map(todo => (todo.id === id ? { ...todo, text: newText } : todo)),
+      todos: todos.map(todos => (todos.id === id ? { ...todos, text: newText } : todos)),
       done: done.map(doneTask => (doneTask.id === id ? { ...doneTask, text: newText } : doneTask))
     });
+  },
+
+  onDragEnd: async (result: DropResult) => {
+    const { source, destination } = result;
+    if (!destination) return;
+  
+    const { todos, done, setTodos } = get();
+  
+    if (source.droppableId === destination.droppableId && source.index === destination.index) {
+      return;
+    }
+  
+    let updatedSourceItems;
+    let updatedDestinationItems;
+    let movedItem;
+  
+    if (source.droppableId === destination.droppableId) {
+      const items = Array.from(source.droppableId === 'todos' ? todos : done);
+      [movedItem] = items.splice(source.index, 1);
+      items.splice(destination.index, 0, movedItem);
+  
+      if (source.droppableId === 'todos') {
+        setTodos(items, 'todos');
+        updatedSourceItems = items;
+      } else {
+        setTodos(items, 'done');
+        updatedSourceItems = items;
+      }
+    } else {
+      const sourceItems = Array.from(source.droppableId === 'todos' ? todos : done);
+      const destinationItems = Array.from(destination.droppableId === 'todos' ? todos : done);
+      [movedItem] = sourceItems.splice(source.index, 1);
+      movedItem.status = destination.droppableId === 'todos' ? 'TODO' : 'DONE';
+      destinationItems.splice(destination.index, 0, movedItem);
+  
+      if (source.droppableId === 'todos') {
+        setTodos(sourceItems, 'todos');
+        setTodos(destinationItems, 'done');
+        updatedSourceItems = sourceItems;
+        updatedDestinationItems = destinationItems;
+      } else {
+        setTodos(sourceItems, 'done');
+        setTodos(destinationItems, 'todos');
+        updatedSourceItems = sourceItems;
+        updatedDestinationItems = destinationItems;
+      }
+    }
+
+    try {
+      await axios.put(`http://localhost:8000/${movedItem.id}`, { status: movedItem.status });
+    } catch (error) {
+      console.error(error);
+      
+      if (updatedSourceItems) {
+        if (source.droppableId === 'todos') {
+          setTodos(updatedSourceItems, 'todos');
+        } else {
+          setTodos(updatedSourceItems, 'done');
+        }
+      }
+      if (updatedDestinationItems) {
+        if (destination.droppableId === 'todos') {
+          setTodos(updatedDestinationItems, 'todos');
+        } else {
+          setTodos(updatedDestinationItems, 'done');
+        }
+      }
+    }
+  },
+  
+  setTodos: (updatedTodos: ITodo[], status: string) => {
+    set({
+      [status.toLowerCase()]: updatedTodos
+    });
+    
   },
 
   setTask: (task: string) => set({ task }),
