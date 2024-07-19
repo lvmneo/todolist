@@ -45,7 +45,7 @@ const TodoInput: React.FC = () => {
           type="text"
           value={task}
           onChange={(e) => setTask(e.target.value)}
-          placeholder="New tasks"
+          placeholder="Add new tasks"
         />
       </div>
     
