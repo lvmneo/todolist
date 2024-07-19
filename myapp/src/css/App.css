@@ -105,7 +105,7 @@ overflow: hidden;
   top: -15px;
   font-weight: bold;
   right: -9px;
-  
+  z-index: 1;
 
 }
 .add-btn {
@@ -122,6 +122,7 @@ overflow: hidden;
   pointer-events: visible;
   border-radius: 5px;
   font-size: 15px;
+  transition: box-shadow 0.3s ease-in-out;
 
 }
 
@@ -129,7 +130,7 @@ overflow: hidden;
   background: #4442f6;
   border-color: #4442f6;
   pointer-events: visible;
-
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -138,7 +139,7 @@ li {
   margin: 5px 0;
   padding: 3px;
   
-
+  position: relative;
   background-color: #f9f9f9;
   border-radius: 0.5rem;
   margin-bottom: 20px;
@@ -168,9 +169,24 @@ li {
 .delete-btn  {
   max-width: 24px; 
   height: auto; 
-  object-fit: contain;
+  border-radius: 5px;
   margin-left: 250px;
   margin-top: 0.1rem;
   cursor: pointer;
+  color: #fefefe;
+  border: none;
+  background: #6664ff;
+  border-color: #6664ff;
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 100;
+  position: relative;
+ 
 }
 
+.delete-btn:hover{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  background: #4442f6;
+  border-color: #4442f6;
+  pointer-events: visible;
+
+}

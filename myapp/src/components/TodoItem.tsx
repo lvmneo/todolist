@@ -37,16 +37,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
   isDone,
 }) => (
   <li>
-    <img
-      src={deleteIcon}
-      alt="Удалить"
+  <button
       className="delete-btn"
       onClick={(event) => {
         event.stopPropagation();
         deleteTask(todos.id, isDone);
       }}
-    />
-
+    >Х
+    </button>
     <div
       className="Task"
       onClick={(event) => {
@@ -60,6 +58,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
         onTextChange={(newText) => updateTaskText(todos.id, newText)}
       />
     </div>
+
     <div className="project-name">{todos.projectName}</div>
     <div className="task-complexity">
       <ComplexityLevels
