@@ -2,19 +2,6 @@ import React from 'react';
 import ComplexityLevels from '../components/ComplexityLevels';
 import { useTodoStore } from '../store/useTodoStore';
 
-interface TodoInputProps {
-  task: string;
-  setTask: React.Dispatch<React.SetStateAction<string>>;
-  projectName: string;
-  setProjectName: React.Dispatch<React.SetStateAction<string>>;
-  complexity: number;
-  setComplexity: React.Dispatch<React.SetStateAction<number>>;
-  selectedDay: string;
-  setSelectedDay: React.Dispatch<React.SetStateAction<string>>;
-  color: string;
-  setColor: React.Dispatch<React.SetStateAction<string>>;
-  addTodo: () => void;
-}
 
 const TodoInput: React.FC = () => {
   const {

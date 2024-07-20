@@ -47,7 +47,7 @@ header {
   
   position: relative;
   padding: 2rem;
-
+  
   
 }
 
@@ -59,15 +59,17 @@ header {
   font-size: 20px;
   width: 160%;
   padding: 0px;
- 
+  
+  
   
 }
 
 .task-input{
   position: relative;
   left: -169px;
-  word-wrap: break-word;
-  
+  width: 600px;
+  overflow-wrap: break-word; 
+
 }
 
 .input-container ::placeholder{
@@ -106,15 +108,18 @@ overflow: hidden;
   font-weight: bold;
   right: -9px;
   z-index: 1;
-
+  word-wrap: break-word;
+  overflow-wrap: break-word; 
+  white-space: normal;
+  max-width: 200px;
 }
 .add-btn {
   color: #fefefe;
   padding: 10px;
   position: relative;
   top: -15px;
-  left:75px;
-  min-width: 20%;
+  left:40px;
+  width: 40px;
   cursor: pointer;
   border: none;
   background: #6664ff;
@@ -143,6 +148,7 @@ li {
   background-color: #f9f9f9;
   border-radius: 0.5rem;
   margin-bottom: 20px;
+
 }
 
 
@@ -162,12 +168,13 @@ li {
   border-radius: 8px;
   background:rgba(213, 204, 255, 1);
   color: rgb(62, 18, 119);
-  word-wrap: break-word;
+
+  
   
 }
 
 .delete-btn  {
-  max-width: 24px; 
+  width: 20px; 
   height: auto; 
   border-radius: 5px;
   margin-left: 250px;
@@ -190,3 +197,4 @@ li {
   pointer-events: visible;
 
 }
+

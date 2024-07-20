@@ -1,7 +1,6 @@
 import React from 'react';
 import ComplexityLevels from '../components/ComplexityLevels';
 import EditableText from '../components/EditableText';
-import deleteIcon from '../images/btndel.png';
 import '../css/App.css';
 
 
